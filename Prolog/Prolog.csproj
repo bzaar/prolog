@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{826279BE-DF24-4129-9E33-6472CA22D83F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Prolog</RootNamespace>
+    <AssemblyName>Prolog</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Compiled\Clause.cs" />
+    <Compile Include="Compiled\Predicate.cs" />
+    <Compile Include="Compiled\IPredicateVisitor.cs" />
+    <Compile Include="Compiled\PrologPredicate.cs" />
+    <Compile Include="Compiled\ExternalPredicate.cs" />
+    <Compile Include="Compiled\Goal.cs" />
+    <Compile Include="Compiled\Program.cs" />
+    <Compile Include="Concat.cs" />
+    <Compile Include="Runtime\Atom.cs" />
+    <Compile Include="Runtime\ConcreteValueEqualityComparer.cs" />
+    <Compile Include="Runtime\EngineInternals.cs" />
+    <Compile Include="Runtime\GoalInstantiator.cs" />
+    <Compile Include="Runtime\IConcreteValueVisitor.cs" />
+    <Compile Include="Runtime\IConcreteValue.cs" />
+    <Compile Include="Atom.cs" />
+    <Compile Include="ExternalPredicateDeclaration.cs" />
+    <Compile Include="IArgument.cs" />
+    <Compile Include="IArgumentVisitor.cs" />
+    <Compile Include="Runtime\IDebugEventSink.cs" />
+    <Compile Include="Runtime\IValueVisitor.cs" />
+    <Compile Include="Runtime\IValue.cs" />
+    <Compile Include="Runtime\ISolutionTreeNode.cs" />
+    <Compile Include="List.cs" />
+    <Compile Include="Runtime\List.cs" />
+    <Compile Include="Runtime\ExternalGoal.cs" />
+    <Compile Include="Runtime\PrologGoal.cs" />
+    <Compile Include="Runtime\BoundVariableSet.cs" />
+    <Compile Include="Runtime\Goal.cs" />
+    <Compile Include="Runtime\ArgumentPrinter.cs" />
+    <Compile Include="Runtime\Frame.cs" />
+    <Compile Include="Runtime\Engine.cs" />
+    <Compile Include="Runtime\ArgumentInstantiator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Runtime\Unifier.cs" />
+    <Compile Include="SolutionTreePrinter.cs" />
+    <Compile Include="Tracer.cs" />
+    <Compile Include="Variable.cs" />
+    <Compile Include="Runtime\Variables.cs" />
+    <Compile Include="Runtime\Variable.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

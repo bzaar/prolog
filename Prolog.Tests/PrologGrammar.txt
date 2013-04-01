@@ -1,0 +1,60 @@
+﻿run :- get_lexer_output (L), program (L, []).
+
+program --> .
+program --> clause_list.
+
+clause_list --> clause.
+clause_list --> clause clause_list.
+
+clause --> prolog_clause.
+clause --> dcg_clause.
+
+dcg_clause --> dcg_head dcg_head_body_separator dcg_body '.'.
+
+dcg_head_body_separator -->  '-' '-' '>'.
+dcg_head_body_separator -->  '-' '-' ':'.
+
+dcg_head --> goal.
+
+dcg_body --> .
+dcg_body --> dcg_goal_list.
+
+dcg_goal_list --> dcg_goal.
+dcg_goal_list --> dcg_goal dcg_goal_list.
+
+dcg_goal --> goal.
+dcg_goal --> variable.
+dcg_goal --> '"' Literal '"'.
+dcg_goal --> "'" Literal "'".
+dcg_goal --> "{" embedded_goal "}".
+
+embedded_goal --> goal.
+
+goal --> lowercase '(' arg_list ')'.
+goal --> lowercase.
+
+arg_list --> .
+arg_list --> arg.
+arg_list --> arg ',' arg_list.
+
+arg --> variable.
+arg --> atom.
+arg --> list.
+
+list --> '[' arg_list ']'.
+
+atom --> lowercase.
+
+prolog_clause --> head ':''-' body '.'.
+prolog_clause --> head '.'.
+
+body --> goal_list.
+
+head --> goal.
+
+goal_list --> goal.
+goal_list --> goal ',' goal_list.
+
+lowercase --> Name {is_lowercase (Name)}.
+variable  --> Name {is_uppercase (Name)}.
+

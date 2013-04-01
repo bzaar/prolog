@@ -496,94 +496,11 @@ Unified:         path(Z=vladivostok, Y=novosib)
 
         private static IEnumerable <Runtime.ISolutionTreeNode> FindFarmerProblemSolutions ()
         {
-            Compiled.Program program = MakeFarmerProblemDatabase ();
+            Compiled.Program program = new Compiler ().Compile ("FarmerProblem.txt");
 
             var solutions = new Runtime.Engine ().Run (program);
 
             return solutions;
-        }
-
-        private static Compiled.Program MakeFarmerProblemDatabase ()
-        {
-            //return new Compiler ().Compile ("FarmerProblem.txt");
-            //safe([F,W,G,C]) :- cabb_safe(F,W,G,C), goat_safe(F,W,G,C).
-            //cabb_safe(B,_,_,B).
-            //cabb_safe(_,_,G,C) :- opposite(G,C).
-            //goat_safe(B,_,B,_).
-            //goat_safe(_,W,_,C) :- opposite(W,C).
-
-            //move([X,X,G,C],[Y,Y,G,C]):-opposite(X,Y). % Move FARMER + WOLF
-            //move([X,W,X,C],[Y,W,Y,C]):-opposite(X,Y). % Move FARMER + GOAT
-            //move([X,W,G,X],[Y,W,G,Y]):-opposite(X,Y). % Move FARMER + CABBAGE
-            //move([X,W,G,C],[Y,W,G,C]):-opposite(X,Y). % Move ONLY FARMER
-
-            //solve(StartState,GoalState):-
-            //      move(StartState,NextState),
-            //      safe(NextState),
-            //      solve(NextState,GoalState).
-            //solve(GoalState,GoalState).
-            
-            //opposite(e,w).
-            //opposite(w,e).
-
-            const string nextstate = "NextState";
-
-            return Compiler.Compile (new AST.Program (new []
-                                                               {
-                                                                   new AST.Clause
-                                                                       {
-                                                                           Head = Helper.MakeGoal("run"),
-                                                                           Body = new []
-                                                                                      {
-                                                                                          Helper.MakeGoal("solve", "[e,e,e,e]", "[w,w,w,w]")
-                                                                                      }
-                                                                       },
-
-                                                                   new AST.Clause
-                                                                       {
-                                                                           Head = Helper.MakeGoal("safe", "[F,W,G,C]"),
-                                                                           Body = new []
-                                                                                      {
-                                                                                          Helper.MakeGoal("cabb_safe", "[F,W,G,C]"),
-                                                                                          Helper.MakeGoal("goat_safe", "[F,W,G,C]")
-                                                                                      }
-                                                                       },
-
-                                                                   Helper.MakeFact ("cabb_safe", "[B,_1,_2,B]"),
-                                                                   new AST.Clause
-                                                                       {
-                                                                           Head = Helper.MakeGoal("cabb_safe", "[_1,_2,G,C]"),
-                                                                           Body = new [] {Helper.MakeGoal("opposite", "G","C")}
-                                                                       },
-
-                                                                   Helper.MakeFact ("goat_safe", "[B,_1,B,_2]"),
-                                                                   new AST.Clause
-                                                                       {
-                                                                           Head = Helper.MakeGoal("goat_safe", "[_1,W,G,_2]"),
-                                                                           Body = new [] {Helper.MakeGoal("opposite", "W","G")}
-                                                                       },
-
-                                                                   new AST.Clause {Head = Helper.MakeGoal("move", "[X,X,G,C]", "[Y,Y,G,C]"), Body = new [] {Helper.MakeGoal("opposite", "X","Y")}},
-                                                                   new AST.Clause {Head = Helper.MakeGoal("move", "[X,W,X,C]", "[Y,W,Y,C]"), Body = new [] {Helper.MakeGoal("opposite", "X","Y")}},
-                                                                   new AST.Clause {Head = Helper.MakeGoal("move", "[X,W,G,X]", "[Y,W,G,Y]"), Body = new [] {Helper.MakeGoal("opposite", "X","Y")}},
-                                                                   new AST.Clause {Head = Helper.MakeGoal("move", "[X,W,G,C]", "[Y,W,G,C]"), Body = new [] {Helper.MakeGoal("opposite", "X","Y")}},
-
-                                                                   new AST.Clause
-                                                                       {
-                                                                           Head = Helper.MakeGoal("solve", "StartState", "GoalState"),
-                                                                           Body = new [] {
-                                                                                             Helper.MakeGoal("move", "StartState", nextstate),
-                                                                                             Helper.MakeGoal("safe", nextstate),
-                                                                                             Helper.MakeGoal("solve", nextstate, "GoalState"),
-                                                                                         }
-                                                                       },
-                                                                   Helper.MakeFact ("solve", "GoalState", "GoalState"),
-
-                                                                   Helper.MakeFact ("opposite", "e", "w"),
-                                                                   Helper.MakeFact ("opposite", "w", "e"),
-
-                                                                   new AST.Clause {Head = Helper.MakeGoal("solve"), Body = new [] {Helper.MakeGoal ("solve", "[e,e,e,e]", "[w,w,w,w]")}}
-                                                               }));
         }
 
         private static string SolutionToString (Runtime.ISolutionTreeNode solution)

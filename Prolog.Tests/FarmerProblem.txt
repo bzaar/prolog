@@ -20,4 +20,4 @@ cabb_safe(B,X,Y,B).
 cabb_safe(X,Y,G,C) :- opposite(G,C).
 
 goat_safe(B,X,B,Y).
-goat_safe(X,W,Y,C) :- opposite(W,C).
+goat_safe(X,W,G,Y) :- opposite(W,G).

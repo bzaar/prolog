@@ -1,21 +1,22 @@
-﻿
 
-## Prolog.NET by R Todd
+## .NET Prolog implementations
 
-*   [Codeplex page](http://prolog.codeplex.com/)
-*   [GitHub repo](https://github.com/Slesa/Prolog.NET)
+*   [Prolog.NET by R. Todd](http://prolog.codeplex.com/) ([GitHub repo](https://github.com/Slesa/Prolog.NET))
 
 *   [Prolog.NET by Ali Hodroj][1]
- 
-*   Lex%2Byacc and MS MPLex%2BMPPG rely on ‘actions’ that are language specific (C or C#). I want my DCG code to be portable.
- 
-*   Antlr
  
 *   [P#][2]
  
 *   [C# Prolog][3] by John Pool
  
 *   [Yield Prolog][4]: This is probably the closest match to what I want. Cons: no unit tests (but can be added), lots of public static methods  not thread-safe.
+ 
+
+## Other Prolog implementations and parser generators
+
+*   Lex%2Byacc and MS MPLex%2BMPPG rely on ‘actions’ that are language specific (C or C#). I want my DCG code to be portable.
+ 
+*   Antlr
  
 *   [XSB][5]. Some people have called it ‘the best…’ (find quote) Cons: not .NET; not thread-safe (see below); licensing conflicts?
  

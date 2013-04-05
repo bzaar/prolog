@@ -107,8 +107,13 @@ You give it a grammar and a text file to parse and get back a parse tree. Exampl
  
 *   Break/resume – once a solution is found, the .NET host can stop the Prolog engine or continue searching for more solutions.
  
-*   Tracing.
- 
+*   Tracing.  The [Engline.Run](https://github.com/bzaar/prolog/blob/master/Prolog/Runtime/EngineInternals.cs) method returns a stream of IDebugEvents.  There are currently three types of events:
+    *   Enter goal
+    *   Leave goal
+    *   Return solution
+
+Enter and Leave a guaranteed to be symmetrical.
+
 *   Full and native Unicode support.
  
 *   Prolog code is independent of the hosting language / platform.  Traditional parser generators (yacc and pre-v4 ANTLR) rely on 'actions' (snippets of Java or C++ code embedded into the grammar) to describe what processing is to be done on the parse tree, e.g. expression evaluation or building custom objects to represent the parse tree).

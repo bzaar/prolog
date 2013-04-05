@@ -116,7 +116,7 @@ Enter and Leave a guaranteed to be symmetrical.
 
 *   Full and native Unicode support.
  
-*   Prolog code is independent of the hosting language / platform.  Traditional parser generators (yacc and pre-v4 ANTLR) rely on 'actions' (snippets of Java or C++ code embedded into the grammar) to describe what processing is to be done on the parse tree, e.g. expression evaluation or building custom objects to represent the parse tree).
+*   Prolog code is independent of the hosting language / platform.  Traditional parser generators (yacc and pre-v4 ANTLR) rely on 'actions' (snippets of Java or C++ code embedded into the grammar) to describe what processing is to be done on the parse tree, e.g. expression evaluation or building custom objects to represent the parse tree.
 
 After 20 years of working on ANTLR, Terrence Parr [decided to steer away from using actions](http://www.antlr.org/wiki/pages/viewpage.action?pageId=29130850):
 

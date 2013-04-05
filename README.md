@@ -64,7 +64,7 @@ Yet another parser? What about
  [yacc][1] 
  and [ANTLR][2] 
  and [regex][3]? 
- And [numerous others][4]?
+ And [numerous others](Alternatives.md)?
  
 
 1.  ANTLR and yacc are ‘parser generators’, i.e. they generate Java / C++ code that can only parse one grammar. 

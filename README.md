@@ -39,8 +39,19 @@ See also this very informative thread on [Prolog Real-Life Usages](http://stacko
 
 ## How this project started
 
-I was working on a natural language processing project and was looking for a tool to parse natural language sentences.  Prolog immediately sprung to mind as I had done some toy projects with it before.  I have googled for the latest and greatest that was out there and ended up downloading and installing SWI-Prolog.  It had a workable IDE with a debugger.  DCG syntax support, cool stuff.  I've tried implementing a few natural language constructs and all went really well until I got hit by left recursion.  You see, some natural language constructs are naturally left-recursive ("my brother's best mate's birthday party") and any ISO-compliant Prolog just heads off into an infinite loop on such input.  Another round of googling brought me a solution, see the section on "Accommodating left recursion in top-down parsing" in the [Wikipedia article on left recursion](http://en.wikipedia.org/wiki/Left_recursion#Accommodating_left_recursion_in_top-down_parsing).  OK, the solution is there, that's good.  How do I use it?
-
+I was working on a natural language processing project and was looking for a tool 
+ to parse natural language sentences.  
+ Prolog immediately sprung to mind as I had done some toy projects with it before.  
+ I have googled for the latest and greatest that was out there and ended up downloading 
+ and installing SWI-Prolog.  It had a workable IDE with a debugger and DCG syntax support, great stuff.  
+ I've tried implementing a few natural language constructs and all went really well until I got hit by left recursion.  
+ You see, some natural language constructs are naturally left-recursive 
+ ("my brother's best mate's birthday party") and any ISO-compliant Prolog is guaranteed to
+ head off into an infinite loop on such input.  
+ Another round of googling brought me a solution, see the section on 
+ "Accommodating left recursion in top-down parsing" in the [Wikipedia article on left recursion](http://en.wikipedia.org/wiki/Left_recursion#Accommodating_left_recursion_in_top-down_parsing).  
+ OK, the solution is there, that's good.  How do I use it?
+ [...]
 
 ## What makes XProlog different / Main principles
 
@@ -104,7 +115,7 @@ You give it a grammar and a text file to parse and get back a parse tree. Exampl
  
 *   Walk the solution tree – see exactly how the Prolog engine arrived at a solution. Or if you are writing a parser, your solution tree will be your parse tree as well.
  
-*   Seamless .NET interoperability. Easily write your own predicates in a .NET language to query external databases or web services or simply do things that are best described imperatively.  See `ExternalPredicateDeclaration`, `ExternalPredicateDefinition`.
+*   Seamless two-way .NET interoperability. Easily write your own predicates in a .NET language to query external databases or web services or simply do things that are best described imperatively.  See `ExternalPredicateDeclaration`, `ExternalPredicateDefinition`.
  
 *   Break/resume – once a solution is found, the .NET host can stop the Prolog engine or continue searching for more solutions.
  
@@ -123,7 +134,7 @@ After 20 years of working on ANTLR, Terrence Parr [decided to steer away from us
 
 >   Those embedded actions (raw Java code or whatever) locked the grammar into use with only one language. If we keep all of the actions out of the grammar and put them into external visitors, we can reuse the same grammar to generate code in any language for which we have an ANTLR target.
 
-What we want to do is we want to separate the two tasks, building the syntax tree and using it.  Prolog is ideally positioned for that as its default execution model involves building a solution tree and the same tree can be used as the abstract syntax tree. 
+What we want to do is we want to separate the two tasks, building the syntax tree and using it.  Prolog is ideally positioned for that as its default execution model involves building a solution tree and the same tree can be used as the abstract syntax tree.  This approach has been tried and tested to implement the parser for XProlog.  It worked great!  There is however, one  improvement that would be nice to have.  Currently whenever you update the prolog program, you also need to update the code that walks the solution/parse tree as that code references nodes/predicates by their string names.  It would be nice to have a tool to generate C# classes from your prolog program that the walking code can then use.  Then any breaking change to prolog code would immediately pop up as a compile error in your C# code.
 
 *   Modular: only use the building blocks your project needs:
 

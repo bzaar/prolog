@@ -17,10 +17,8 @@
  
 *   Antlr
  
-*   [XSB][5]. Some people have called it ‘the best…’ (find quote) Cons: not .NET; not thread-safe (see below); licensing conflicts?
+*   [XSB][5]. Some people have called it ‘the best…’ (find quote) Cons: not thread-safe ([quote][7]):
  
- XSB is not thread-safe ([quote][7]): 
-
     > “Currently, only one query can be active at a time. I.e., one must completely finish processing one query (either by retrieving all the answers for it, or by issuing a call to xsb\_close\_query(), before trying to evaluate another.”
 
 *   SWI-Prolog: lazy lists

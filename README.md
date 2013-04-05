@@ -32,8 +32,9 @@ How does Prolog figure out the solution? You may feel a bit underwhelmed but the
  
 *   Text parsing (think regex, yacc or ANTLR).
  
-
 It is the problem of natural language text parsing that brought XProlog to life.
+
+See also this very informative thread on [Prolog Real-Life Usages](http://stackoverflow.com/questions/130097/real-world-prolog-usage).
 
 
 ## How this project started

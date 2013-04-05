@@ -111,9 +111,17 @@ You give it a grammar and a text file to parse and get back a parse tree. Exampl
  
 *   Full and native Unicode support.
  
-*   Prolog code is independent of the hosting language / platform.
- 
-*   Componentized: only use the building blocks your project needs (reference a dependencies chart here)
+*   Prolog code is independent of the hosting language / platform.  Traditional parser generators (yacc and pre-v4 ANTLR) rely on 'actions' (snippets of Java or C++ code embedded into the grammar) to describe what processing is to be done on the parse tree, e.g. expression evaluation or building custom objects to represent the parse tree).
+
+After 20 years of working on ANTLR, Terrence Parr [decided to steer away from using actions](http://www.antlr.org/wiki/pages/viewpage.action?pageId=29130850):
+
+>   Those embedded actions (raw Java code or whatever) locked the grammar into use with only one language. If we keep all of the actions out of the grammar and put them into external visitors, we can reuse the same grammar to generate code in any language for which we have an ANTLR target.
+
+What we want to do is we want to separate the two tasks, building the syntax tree and using it.  Prolog is ideally positioned for that as its default execution model involves building a solution tree and the same tree can be used as the abstract syntax tree. 
+
+*   Modular: only use the building blocks your project needs:
+
+![Module Dependencies](http://morpher.ru/Prolog/Dependencies.png)
  
 *   Extensible: any component (see the dependencies chart again) can be swapped for your own: if you don’t like the standard depth-first left-to-right engine, go ahead and write your own. There are plenty of possibilities to explore there: implement tabling (intermediate result caching), concurrency, best goal order detection...
  
@@ -159,7 +167,6 @@ Current status: there is currently a mini-debugger that shows the current soluti
  
 
     
- ![Module Dependencies][7]
     
     
  [Download v 1.0][8]
@@ -170,6 +177,5 @@ Current status: there is currently a mini-debugger that shows the current soluti
  [4]: http://morpher.ru/Prolog/Links.aspx
  [5]: http://en.wikipedia.org/wiki/Stochastic_context-free_grammar
  [6]: http://en.wikibooks.org/wiki/Prolog/Higher_Order_Programming
- [7]: http://morpher.ru/Prolog/Dependencies.png
  [8]: http://morpher.ru/Prolog/Prolog.zip  
 

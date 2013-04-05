@@ -140,7 +140,7 @@ What we want to do is we want to separate the two tasks, building the syntax tre
  
 *   Lean: XProlog runtime DLL is just 31K. That's all you need to run a compiled Prolog program.
  
-*   Thread safe: no global variables anywhere.
+*   Thread safe: no global variables anywhere.  Any number of queries can be running against one prolog program.  Any number of Prolog programs can run independently at the same time.
  
 *   Unit test driven from inception.
  

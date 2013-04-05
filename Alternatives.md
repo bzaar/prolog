@@ -1,4 +1,3 @@
-
 ## .NET Prolog implementations
 
 *   [Prolog.NET by R. Todd](http://prolog.codeplex.com/) ([GitHub repo](https://github.com/Slesa/Prolog.NET))
@@ -14,20 +13,20 @@
 
 ## Other Prolog implementations and parser generators
 
-*   Lex%2Byacc and MS MPLex%2BMPPG rely on ‘actions’ that are language specific (C or C#). I want my DCG code to be portable.
+*   Lex+yacc and MS MPLex+MPPG rely on ‘actions’ that are language specific (C or C#). I want my DCG code to be portable.
  
 *   Antlr
  
 *   [XSB][5]. Some people have called it ‘the best…’ (find quote) Cons: not .NET; not thread-safe (see below); licensing conflicts?
  
+ XSB is not thread-safe ([quote][7]): 
+
+    > “Currently, only one query can be active at a time. I.e., one must completely finish processing one query (either by retrieving all the answers for it, or by issuing a call to xsb\_close\_query(), before trying to evaluate another.”
+
 *   SWI-Prolog: lazy lists
  
 *   [tuProlog][6] 
  
-
-XSB is not thread-safe ([quote][7]): 
-
-> “Currently, only one query can be active at a time. I.e., one must completely finish processing one query (either by retrieving all the answers for it, or by issuing a call to xsb\_close\_query(), before trying to evaluate another.”
 
 *   [AGFL][8]   
 

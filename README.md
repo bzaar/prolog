@@ -40,18 +40,14 @@ See also this very informative thread on [Prolog Real-Life Usages](http://stacko
 ## How this project started
 
 I was working on a natural language processing project and was looking for a tool 
- to parse natural language sentences.  
- Prolog immediately sprung to mind as I had done some toy projects with it before.  
- I have googled for the latest and greatest that was out there and ended up downloading 
- and installing SWI-Prolog.  It had a workable IDE with a debugger and DCG syntax support, great stuff.  
- I've tried implementing a few natural language constructs and all went really well until I got hit by left recursion.  
- You see, some natural language constructs are naturally left-recursive 
+ to parse natural language sentences.  Prolog immediately sprung to mind as I had 
+ done projects with it before.  I have googled for the latest and greatest that was out there and ended up downloading 
+ and installing SWI-Prolog.  It had a workable IDE with a debugger and DCG syntax support, great stuff.  I've tried
+ implementing a few natural language constructs and all went really well until I got hit by left recursion.  You see, 
+ some natural language constructs are naturally left-recursive 
  ("my brother's best mate's birthday party") and any ISO-compliant Prolog is guaranteed to
- head off into an infinite loop on such input.  
- Another round of googling brought me a solution, see the section on 
- "Accommodating left recursion in top-down parsing" in the [Wikipedia article on left recursion](http://en.wikipedia.org/wiki/Left_recursion#Accommodating_left_recursion_in_top-down_parsing).  
- OK, the solution is there, that's good.  How do I use it?
- [...]
+ crash with a stack overflow on such input.  Another round of googling brought me a solution, see the section on 
+ "Accommodating left recursion in top-down parsing" in the [Wikipedia article on left recursion](http://en.wikipedia.org/wiki/Left_recursion#Accommodating_left_recursion_in_top-down_parsing).  OK, the solution is there, that's good.  How do I use it? [...]
 
 ## What makes XProlog different / Main principles
 
@@ -124,7 +120,7 @@ You give it a grammar and a text file to parse and get back a parse tree. Exampl
     *   Leave goal
     *   Return solution
 
-Enter and Leave a guaranteed to be symmetrical.
+ Enter and Leave are guaranteed to be symmetrical.
 
 *   Full and native Unicode support.
  
@@ -138,7 +134,7 @@ What we want to do is we want to separate the two tasks, building the syntax tre
 
 *   Modular: only use the building blocks your project needs:
 
-![Module Dependencies](http://morpher.ru/Prolog/Dependencies.png)
+ ![Module Dependencies](http://morpher.ru/Prolog/Dependencies.png)
  
 *   Extensible: any component (see the dependencies chart again) can be swapped for your own: if you don’t like the standard depth-first left-to-right engine, go ahead and write your own. There are plenty of possibilities to explore there: implement tabling (intermediate result caching), concurrency, best goal order detection...
  

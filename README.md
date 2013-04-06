@@ -202,14 +202,10 @@ Current status: there is currently a mini-debugger that shows the current soluti
 
     
     
-    
- [Download v 1.0][8]
 
  [1]: http://dinosaur.compilertools.net/yacc/index.html
  [2]: http://www.antlr.org/
  [3]: http://en.wikipedia.org/wiki/Regular_expression
- [4]: http://morpher.ru/Prolog/Links.aspx
  [5]: http://en.wikipedia.org/wiki/Stochastic_context-free_grammar
  [6]: http://en.wikibooks.org/wiki/Prolog/Higher_Order_Programming
- [8]: http://morpher.ru/Prolog/Prolog.zip  
 

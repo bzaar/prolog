@@ -49,7 +49,7 @@ I was working on a natural language processing project and was looking for a too
  crash with a stack overflow on such input.  Another round of googling brought me a solution, see the section on 
  "Accommodating left recursion in top-down parsing" in the [Wikipedia article on left recursion](http://en.wikipedia.org/wiki/Left_recursion#Accommodating_left_recursion_in_top-down_parsing).  The solution is to rewrite your grammar/Prolog program so that it is no longer left-recursive.  
  See also this nice article: [Adding recursive rules](http://www.learnprolognow.org/lpnpage.php?pagetype=html&pageid=lpn-htmlse29#x47-670007.2) where they say:
-> the solution is satisfactory. But it leaves something to be desired from a linguistic perspective. The DCG that looped was at least faithful to the linguistic intuitions about the structure of sentences made using *and , but* , and *or*. The new DCG imposes an additional layer of structure that is motivated by processing rather than linguistic considerations; we are no longer simply turning grammars into Prolog.
+> "[...] the [grammar rewriting] solution is satisfactory. But it leaves something to be desired from a linguistic perspective. The DCG that looped was at least faithful to the linguistic intuitions about the structure of sentences made using *and , but* , and *or*. The new DCG imposes an additional layer of structure that is motivated by processing rather than linguistic considerations; we are no longer simply turning grammars into Prolog."
 
 Isn't that something that can be handled by the Prolog engine?
 
@@ -158,7 +158,7 @@ What we want to do is we want to separate the two tasks, building the syntax tre
  
 *   Extensible: any component (see the dependencies chart again) can be swapped for your own: if you don’t like the standard depth-first left-to-right engine, go ahead and write your own. There are plenty of possibilities to explore there: implement tabling (intermediate result caching), concurrency, best goal order detection...
  
-*   Lean: XProlog runtime DLL is just 31K. That's all you need to run a compiled Prolog program.
+*   Lean: XProlog runtime DLL is just 31K. That's all you need to run a compiled Prolog program.  Compare this to ~ 700K of 'core' SWI-Prolog or XSB.
  
 *   Thread safe: 
     *   Any number of queries can be running against one prolog program at any time.  

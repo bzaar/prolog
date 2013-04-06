@@ -47,9 +47,11 @@ I was working on a natural language processing project and was looking for a too
  some natural language constructs are naturally left-recursive 
  ("my brother's best mate's birthday party") and any ISO-compliant Prolog is guaranteed to
  crash with a stack overflow on such input.  Another round of googling brought me a solution, see the section on 
- "Accommodating left recursion in top-down parsing" in the [Wikipedia article on left recursion](http://en.wikipedia.org/wiki/Left_recursion#Accommodating_left_recursion_in_top-down_parsing).  
- See also this nice article: [Adding recursive rules](http://www.learnprolognow.org/lpnpage.php?pagetype=html&pageid=lpn-htmlse29#x47-670007.2).
-[TODO: finish this.]
+ "Accommodating left recursion in top-down parsing" in the [Wikipedia article on left recursion](http://en.wikipedia.org/wiki/Left_recursion#Accommodating_left_recursion_in_top-down_parsing).  The solution is to rewrite your grammar/Prolog program so that it is no longer left-recursive.  
+ See also this nice article: [Adding recursive rules](http://www.learnprolognow.org/lpnpage.php?pagetype=html&pageid=lpn-htmlse29#x47-670007.2) where they say:
+> the solution is satisfactory. But it leaves something to be desired from a linguistic perspective. The DCG that looped was at least faithful to the linguistic intuitions about the structure of sentences made using *and , but* , and *or*. The new DCG imposes an additional layer of structure that is motivated by processing rather than linguistic considerations; we are no longer simply turning grammars into Prolog.
+
+Isn't that something that can be handled by the Prolog engine?
 
 ## What makes XProlog different
 

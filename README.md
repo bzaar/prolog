@@ -59,7 +59,7 @@ The aim is to build a fully declarative Prolog.  Why?  The problem with the ISO 
 *   the order of clauses does not matter;
 *   left recursion can be dealt with at the engine level;
 *   when used as a parser, Prolog is ideal as its solution tree can also be used as the parse tree;  no extra processing, no grammar attributing or 'actions' are required.  Existing implementations do not seem to provide this functionality of exposing the solution tree.
-*   in path-finding problems (such as the travelling salesman problem) there is no need to store the visited nodes; this again can be handled by the engine;
+*   in path-finding problems (such as the travelling salesman problem) there is no need to store the visited nodes; this again can be (and is, in XProlog) handled by the engine;
 *   if the program has no state or side effects, a lot of other optimizations become possible.
 
 For these reasons, XProlog is intentionally not ISO Prolog compatible and does not use the Warren Abstract Machine.

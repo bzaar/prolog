@@ -47,14 +47,32 @@ I was working on a natural language processing project and was looking for a too
  some natural language constructs are naturally left-recursive 
  ("my brother's best mate's birthday party") and any ISO-compliant Prolog is guaranteed to
  crash with a stack overflow on such input.  Another round of googling brought me a solution, see the section on 
- "Accommodating left recursion in top-down parsing" in the [Wikipedia article on left recursion](http://en.wikipedia.org/wiki/Left_recursion#Accommodating_left_recursion_in_top-down_parsing).  OK, the solution is there, that's good.  How do I use it? [...]
+ "Accommodating left recursion in top-down parsing" in the [Wikipedia article on left recursion](http://en.wikipedia.org/wiki/Left_recursion#Accommodating_left_recursion_in_top-down_parsing).  
+ See also this nice article: [Adding recursive rules](http://www.learnprolognow.org/lpnpage.php?pagetype=html&pageid=lpn-htmlse29#x47-670007.2).
+[TODO: finish this.]
 
-## What makes XProlog different / Main principles
+## What makes XProlog different
 
-*   Not trying to be a full-fledged programming language. It's just a library.
+Why another Prolog?  The (relatively niche) Prolog market is swarming with competing, incompatible implementations.  Why add another?  
+
+The aim is to build a fully declarative Prolog.  Why?  The problem with the ISO Prolog and all compliant implementations is they try to mix both approaches, the 'logical' and the 'imperative' / procedural.  If our Prolog is fully declarative, then 
+*   the order of clauses does not matter;
+*   left recursion can be dealt with at the engine level;
+*   when used as a parser, Prolog is ideal as its solution tree can also be used as the parse tree;  no extra processing, no grammar attributing or 'actions' are required.  Existing implementations do not seem to provide this functionality of exposing the solution tree.
+*   in path-finding problems (such as the travelling salesman problem) there is no need to store the visited nodes; this again can be handled by the engine;
+*   if the program has no state or side effects, a lot of other optimizations become possible.
+
+For these reasons, XProlog is intentionally not ISO Prolog compatible and does not use the Warren Abstract Machine.
+
+## Main principles
+
+*   Fully declarative and not tied to any particular execution engine.
+    *   No cuts or fails.
+    *   No predicates with side effects (e.g. writeln, assertz).
+    *   Not using the Warren Abstract Machine at the moment.  The WAM is a rigid execution model inherently incapable of handling left recursion.  The WAM runtime can be added if/when compatibility with other Prolog implementations is required.  This will be an additive change rather than a change in the existing execution engine.  The system is modular and allows easy swapping of one execution engine for another.
+
+*   Not trying to be an all-in-one development toolkit with a huge multi-purpose 'standard library'.  It's just a DLL.  A small DLL.
  
-*   Fully declarative: no cuts or fails; leave the procedural aspects to the execution engine.
-
 *   Use-case driven: every feature is there for a purpose.
 
 
@@ -67,13 +85,13 @@ Yet another parser? What about
  And [numerous others](Alternatives.md)?
  
 
-1.  ANTLR and yacc are ‘parser generators’, i.e. they generate Java / C++ code that can only parse one grammar. 
- XProlog removes this intermediate step from the pipeline. 
- 
- 
-2.  XProlog can parse ambiguous texts, i.e. texts that allow more than one interpretation, such as natural language texts.
+1.  XProlog can parse ambiguous texts, i.e. texts that allow more than one interpretation, such as natural language texts.
  It is the [ state-of-the-art way ][5] of dealing with natural language ambigities: 
  first you build all possible parse trees and then choose one based on its weight/probability score.
+ 
+2.  ANTLR and yacc are ‘parser generators’, i.e. they generate Java / C++ code that can only parse one grammar. 
+ XProlog removes this intermediate step from the pipeline. 
+ 
  
  
 ## How to Run this Project

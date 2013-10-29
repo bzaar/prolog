@@ -11,58 +11,60 @@ namespace Prolog.Tests
     {
         [TestMethod] public void СинийКарандаш ()
         {
-            AssertOneSolution ("синий карандаш", 1);
+            AssertSolutionCount ("синий карандаш", 1);
         }
 
         [TestMethod] public void СинийКарандашИРучка ()
         {
-            AssertOneSolution ("синий карандаш и ручка", 1);
+            AssertSolutionCount ("синий карандаш и ручка", 1);
         }
 
         [TestMethod] public void СинийКарандашИКраснаяРучка ()
         {
-            AssertOneSolution ("синий карандаш и красная ручка", 1);
+            AssertSolutionCount ("синий карандаш и красная ручка", 1);
         }
 
         [TestMethod] public void НачальникАвтобазы ()
         {
-            AssertOneSolution ("начальник автобазы", 1);
+            AssertSolutionCount ("начальник автобазы", 1);
         }
 
         [Ignore]
         [TestMethod] public void ГвардейскийОрденаЛенинаКраснознаменныйПолк ()
         {
-            AssertOneSolution ("гвардейский ордена ленина краснознаменный полк", 3);
+            AssertSolutionCount ("гвардейский ордена ленина краснознаменный полк", 3);
         }
 
-        [Ignore]
         [TestMethod] public void ОрденаЛенинаПолк ()
         {
-            AssertOneSolution ("ордена ленина полк", 3);
+            AssertSolutionCount ("ордена ленина полк", 3);
         }
 
         [TestMethod] public void ПрофессорКислыхЩей ()
         {
-            AssertOneSolution ("профессор кислых щей", 1);
+            AssertSolutionCount ("профессор кислых щей", 1);
         }
 
-        private static void AssertOneSolution (string text, int expectedSolutionCount)
+        private static void AssertSolutionCount (string text, int expectedSolutionCount)
         {
             var externalPredicates = new [] {Concat.GetConcat (), Lexer.GetLexer (new StringReader (text))};
 
             program.SetExternalPredicateCallbacks (externalPredicates);
 
-            var solutionTreePrinter = new SolutionTreePrinter (SolutionTreePrinter.PrintDcgNode);
-
             var engine = new Engine ();
 
-            var tracer = new Tracer();
-            engine.Unified += tracer.Engine_Unified;
-            engine.Failed  += tracer.Engine_Failed;
+            //var tracer = new Tracer();
+            //engine.Unified += tracer.Engine_Unified;
+            //engine.Failed  += tracer.Engine_Failed;
 
-            var solutions = engine.Run (program).Select (solutionTreePrinter.Print).ToArray ();
+            var solutions = engine.Run (program).Select (Print).ToArray ();
 
             Assert.AreEqual (expectedSolutionCount, solutions.Count ());
+        }
+
+        private static string Print (ISolutionTreeNode solution)
+        {
+            return new SolutionTreePrinter (SolutionTreePrinter.PrintDcgNode).Print (solution);
         }
 
         private static Compiled.Program GetProgram ()
